@@ -76,7 +76,7 @@ cmd = format('jq \
     -n \'{
             pallets: $pallets[0],
             worker: $worker[0],
-    ] }\' > context.json', pallets_data, worker_data)
+    }\' > context.json', pallets_data, worker_data)
 system(cmd)
 
 cmd = format('tera --env --env-key env --include-path templates \
