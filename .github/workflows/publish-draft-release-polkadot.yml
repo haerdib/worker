@@ -64,6 +64,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{ github.ref }}
-          release_name: Polkadot ${{ github.ref }}
+          release_name: SDK ${{ github.ref }}
           body_path: ./worker/scripts/changelog/release-notes.md
           draft: true
