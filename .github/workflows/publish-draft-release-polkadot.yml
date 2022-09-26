@@ -1,0 +1,79 @@
+name: Release - Publish draft
+
+on:
+  push:
+    tags:
+      # Catches v1.2.3 and v1.2.3-rc1
+      - v[0-9]+.[0-9]+.[0-9]+*
+
+jobs:
+  get-rust-version:
+    runs-on: ubuntu-latest
+    outputs:
+      rustc-nightly: ${{ steps.get-rust-version.outputs.nightly }}
+    steps:
+      - id: get-rust-version
+        run: |
+          echo "::set-output name=nightly::$(rustc +nightly --version)"
+  publish-draft-release:
+    runs-on: ubuntu-latest
+    needs: ["get-rust-version"]
+    steps:
+      - name: Checkout sources
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          path: worker
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.0.0
+
+      - name: Download srtool json output
+        uses: actions/download-artifact@v3
+
+      - name: Prepare tooling
+        run: |
+          cd worker/scripts/changelog
+          gem install bundler changelogerator:0.9.1
+          bundle install
+          changelogerator --help
+          URL=https://github.com/chevdor/tera-cli/releases/download/v0.2.1/tera-cli_linux_amd64.deb
+          wget $URL -O tera.deb
+          sudo dpkg -i tera.deb
+          tera --version
+
+      - name: Generate release notes
+        env:
+          RUSTC_NIGHTLY: ${{ needs.get-rust-version.outputs.rustc-nightly }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEBUG: 1
+          PRE_RELEASE: ${{ github.event.inputs.pre_release }}
+        run: |
+          find ${{env.GITHUB_WORKSPACE}} -type f -name "*_srtool_output.json"
+
+          cd worker/scripts/changelog
+
+          ./bin/changelog ${GITHUB_REF}
+          ls -al release-notes.md
+          ls -al context.json
+
+      - name: Archive artifact context.json
+        uses: actions/upload-artifact@v3
+        with:
+          name: release-notes-context
+          path: |
+            worker/scripts/changelog/context.json
+            **/*_srtool_output.json
+
+      - name: Create draft release
+        id: create-release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Polkadot ${{ github.ref }}
+          body_path: ./worker/scripts/changelog/release-notes.md
+          draft: true

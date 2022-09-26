@@ -1,0 +1,20 @@
+{# This macro shows ONE change #}
+{%- macro change(c, cml="[C]", pal="[P]", work="[W]") -%}
+
+{%- if c.meta.C and c.meta.C.value >= 7 -%}
+{%- set prio = " ‼️ HIGH" -%}
+{%- elif c.meta.C and c.meta.C.value >= 3 -%}
+{%- set prio = " ❗️ Medium" -%}
+{%- elif c.meta.C and c.meta.C.value < 3 -%}
+{%- set prio = " Low" -%}
+{%- else -%}
+{%- set prio = "" -%}
+{%- endif -%}
+
+{%- if c.html_url is containing("worker") -%}
+{%- set repo = wor -%}
+{%- elif c.html_url is containing("pallet") -%}
+{%- set repo = pal -%}
+{%- else -%}
+{%- set repo = "   " -%}
+{%- endif -%}
