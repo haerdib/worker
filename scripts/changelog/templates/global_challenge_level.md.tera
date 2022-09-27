@@ -7,9 +7,13 @@
 {# We fetch the various levels #}
 {%- if worker.meta.E -%}
 {%- set worker_level = worker.meta.E.max -%}
+{%- else -%}
+{%- set worker_level = worker.meta.E.min -%}
 {%- endif -%}
 {%- if pallet.meta.E -%}
 {%- set pallet_level = pallet.meta.E.max -%}
+{%- else -%}
+{%- set pallet_level = pallet.meta.E.min -%}
 {%- endif -%}
 
 {# We compute the global level #}
