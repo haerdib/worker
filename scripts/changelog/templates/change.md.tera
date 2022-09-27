@@ -1,5 +1,5 @@
 {# This macro shows ONE change #}
-{%- macro change(c, cml="[C]", pal="[P]", work="[W]") -%}
+{%- macro change(c, cml="[C]", pal="[P]", wor="[W]") -%}
 
 {%- if c.meta.C and c.meta.C.value >= 7 -%}
 {%- set prio = " ‼️ HIGH" -%}
