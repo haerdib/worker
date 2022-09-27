@@ -1,5 +1,5 @@
 {% import "change.md.tera" as m_c -%}
-### Client
+### EVM Feature
 
 {#- The changes are sorted by merge date #}
 {%- for pr in changes | sort(attribute="merged_at") %}
