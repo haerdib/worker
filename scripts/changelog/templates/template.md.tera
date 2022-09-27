@@ -3,12 +3,16 @@
 {% include "pre_release.md.tera" -%}
 
 {% if env.PRE_RELEASE == "true" -%}
-This pre-release contains the changes from `{{ env.REF1 | replace(from="refs/tags/", to="") }}` to `{{ env.REF2 | replace(from="refs/tags/", to="") }}`.
+This pre-release contains the changes from `{{ env.REF1 | replace(from="refs/tags/", to="") }}` to `{{ env.REF2 |
+replace(from="refs/tags/", to="") }}`.
 {%- else -%}
-This release contains the changes from `{{ env.REF1 | replace(from="refs/tags/", to="") }}` to `{{ env.REF2 | replace(from="refs/tags/", to="") }}`.
+This release contains the changes from `{{ env.REF1 | replace(from="refs/tags/", to="") }}` to `{{ env.REF2 |
+replace(from="refs/tags/", to="") }}`.
 {% endif -%}
 
-{%- set changes = worker.changes | concat(with=pallet.changes) -%}
+{# -- For now no pallet changes included -- #}
+{# {%- set changes = worker.changes | concat(with=pallet.changes) -%}##}
+{%- set changes = worker.changes -%}
 {%- include "debug.md.tera" -%}
 
 {%- set CML = "[C]" -%}
