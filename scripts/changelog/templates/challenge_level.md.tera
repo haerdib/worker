@@ -11,7 +11,7 @@
     {%- set text = "This release contains some non-trivial updates. Be mindful when upgrading." -%}
 {%- else -%}
     {%- set level = "Trivial" -%}
-    {%- set text = "This release contains relatively small updates and should be trivial to update to." -%}
+    {%- set text = "This release contains relatively small updates." -%}
 {%- endif %}
 
 
