@@ -25,7 +25,7 @@ There are other misc. changes. You can expand the list below to view them all.
         {%- if pr.meta.B.value == 0 %}
         {#- We skip silent ones -#}
         {%- else -%}
-            {%- if pr.meta.B >= 1 %}
+            {%- if pr.meta.B.value >= 1 %}
 - {{ m_c::change(c=pr) }}
             {%- endif -%}
         {% endif -%}
