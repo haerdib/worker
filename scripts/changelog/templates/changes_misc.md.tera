@@ -23,10 +23,9 @@ There are other misc. changes. You can expand the list below to view them all.
 {%- for pr in changes | sort(attribute="merged_at") %}
     {%- if pr.meta.B %}
         {%- if pr.meta.B.value == 0 %}
-        {#- We skip silent ones -#}
+{#- We skip silent ones -#}
         {%- else -%}
 - {{ m_c::change(c=pr) }}
-
         {% endif -%}
     {% endif -%}
 {% endfor %}
