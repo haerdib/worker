@@ -8,12 +8,12 @@
 {%- if worker.meta.E -%}
 {%- set worker_level = worker.meta.E.max -%}
 {%- else -%}
-{%- set worker_level = worker.meta.E.min -%}
+{%- set worker_level = 0 -%}
 {%- endif -%}
 {%- if pallet.meta.E -%}
 {%- set pallet_level = pallet.meta.E.max -%}
 {%- else -%}
-{%- set pallet_level = pallet.meta.E.min -%}
+{%- set pallet_level = 0 -%}
 {%- endif -%}
 
 {# We compute the global level #}
