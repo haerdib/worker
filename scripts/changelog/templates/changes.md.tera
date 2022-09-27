@@ -1,10 +1,11 @@
 {# This include generates the section showing the changes #}
 ## Changes
 
-### Legend
+{# for not now printed until pallet is actually included #}
+{#  ### Legend #}
 
-- {{ WOR }} Worker
-- {{ PAL }} Pallet
+{# - {{ WOR }} Worker #}
+{# - {{ PAL }} Pallet #}
 
 {% include "changes_applibs.md.tera" %}
 

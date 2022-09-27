@@ -25,6 +25,9 @@ replace(from="refs/tags/", to="") }}`.
 {# -- Important automatic section -- #}
 {% include "global_priority.md.tera" -%}
 
+{# -- Important automatic section -- #}
+{% include "global_challenge_level.md.tera" -%}
+
 {# --------------------------------- #}
 
 {% include "changes.md.tera" -%}

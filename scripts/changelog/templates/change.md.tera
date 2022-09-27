@@ -11,13 +11,17 @@
 {%- set prio = "" -%}
 {%- endif -%}
 
+
 {%- if c.html_url is containing("worker") -%}
 {%- set repo = wor -%}
 {%- elif c.html_url is containing("pallets") -%}
 {%- set repo = pal -%}
 {%- else -%}
-{%- set repo = "   " -%}
+{%- set repo = " " -%}
 {%- endif -%}
+
+{# For now don't show pallets or worker #}
+{%- set repo = " " -%}
 
 {%- if c.meta.E and c.meta.E.value >= 7 -%}
 {%- set challenge = " 💥 breaking changes " -%}
@@ -26,7 +30,7 @@
 {%- elif c.meta.E and c.meta.E.value == 5 -%}
 {%- set challenge = " 🔥 breaks public rpc api " -%}
 {%- elif c.meta.E and c.meta.E.value >= 3 -%}
-{%- set challenge = " ⏰ attention required " -%}
+{%- set challenge = " 📢 attention required " -%}
 {%- elif c.meta.E and c.meta.E.value < 3 -%}
 {%- set challenge = " ✅ easy merge " -%}
 {%- else -%}
