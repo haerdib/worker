@@ -20,6 +20,3 @@ Use with caution, as this is work in progress. Hence, the code is most likely pr
 
 ### Runtime
 - Enclave runtime: https://github.com/integritee-network/worker/pull/472
-
-### Non-worker related graphics
-- substrate related graphics: https://github.com/brenzi/substrate-doc
